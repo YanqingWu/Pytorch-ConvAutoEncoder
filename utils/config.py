@@ -8,7 +8,7 @@ parser.add_argument('-d', '--data', default='data', type=str,
                     help='data root path, have {train, val} under root, '
                          'every class is a single folder under {train, val}.')
 
-parser.add_argument('-j', '--workers', default=0, type=int,
+parser.add_argument('-j', '--workers', default=4, type=int,
                     help='number of data loading workers, windows need to change to 0.')
 
 parser.add_argument('-ih', '--img-height', default=512, type=int,
@@ -39,15 +39,15 @@ parser.add_argument('-cos', '--cosine', action='store_false',
 parser.add_argument('-lpt', '--low-precision-training', action='store_true',
                     help='low precision training')
 
-# """ model args """
-# parser.add_argument('-a', '--arc', default='',
-#                     help='model architecture')
+""" model args """
+parser.add_argument('-a', '--arc', default='unet',
+                    help='model architecture')
 
 """ train args """
 parser.add_argument('-ep', '--epochs', default=200, type=int,
                     help='number of total epochs to run')
 
-parser.add_argument('-tb', '--train-batch', default=8, type=int,
+parser.add_argument('-tb', '--train-batch', default=6, type=int,
                     help='train batch size')
 
 """ optimizer """
@@ -63,7 +63,7 @@ parser.add_argument('-r', '--resume', type=str,
                     help='resume model')
 
 """ val args """
-parser.add_argument('-vb', '--val-batch', default=16, type=int,
+parser.add_argument('-vb', '--val-batch', default=12, type=int,
                     help='val batch size')
 
 """ seed args """

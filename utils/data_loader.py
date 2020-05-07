@@ -28,9 +28,8 @@ class LoadData:
             raise NotImplementedError
 
     def _augment(self, img):
-        if self.mode == 'train':
-            if self.aug:
-                img = augment(img, (self.img_height, self.img_width))
+        if self.aug:
+            img = augment(img)
 
         return cv2.resize(img, (self.img_height, self.img_width))
 

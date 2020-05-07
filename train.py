@@ -1,4 +1,5 @@
 from utils.utils import *
+from models.unet import UNet
 from utils.config import parser
 from utils.logger import Logger
 from utils.trainer import Trainer
@@ -34,7 +35,10 @@ def main(args):
         model.load_state_dict(states['state_dict'])
     else:
         logger.log.info('not using resume model')
-        model = AutoEncoder()
+        if args.arc == 'ae':
+            model = AutoEncoder()
+        elif args.arc == 'unet':
+            model = UNet(num_classes=3)
 
     """ set cuda """
     use_cuda, multi_gpus = use_gpu_or_multi_gpus(args, logger)

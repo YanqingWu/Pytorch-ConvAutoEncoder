@@ -37,7 +37,6 @@ if __name__ == '__main__':
     state = torch.load('trained_models/73b6b4bd_AutoEncoder_loss_0.0337_model_best.pth')
     model = state['arc'].to(device)
     model.load_state_dict(state['state_dict'])
-    # print('loaded model: %s' % args.load_model)
     model.eval()
     # img = Image.open('data/test/left_01-16_14_58_41_059.jpg').convert('RGB')
     img = Image.open('data/val/67_20-01-07_03_38_42_a.jpg').convert('RGB')

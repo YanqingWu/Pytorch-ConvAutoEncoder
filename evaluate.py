@@ -24,7 +24,7 @@ def evaluate_path(path, model, batch_size=16):
     res = []
     loader = PathLoader(path)
     batch_loader = DataLoader(loader, batch_size=batch_size, shuffle=False, num_workers=4, drop_last=False)
-    indexs = [path.split('/')[-1]] * len(loader)
+    indexs = [file.split('/')[-1] for file in loader.images]
     for imgs in tqdm(batch_loader):
         reconstruct_error = evaluate(model, imgs)
         res.extend(reconstruct_error)
