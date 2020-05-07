@@ -1,15 +1,18 @@
 import cv2
+import glob
 import math
 import torch
 import random
 import numpy as np
 import torch.nn as nn
+from PIL import Image
 import torch.optim as optim
 from torch.utils.data import DataLoader
 
 
 def process_image(img, img_size=()):
     if img_size:
+        img = np.uint8(img)
         img = cv2.resize(img, img_size)
     img = img / 255
     img -= np.array([0.485, 0.456, 0.406])
@@ -114,4 +117,18 @@ def get_optimizer(args, model, logger):
         optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
 
     return optimizer
+
+
+class PathLoader(torch.utils.data.Dataset):
+    def __init__(self, path, img_size=(512, 512)):
+        self.images = glob.glob(path + '/*.jpg')
+        self.img_size = img_size
+
+    def __getitem__(self, item):
+        img = Image.open(self.images[item]).convert('RGB')
+        img = process_image(img, self.img_size)
+        return img
+
+    def __len__(self):
+        return len(self.images)
 

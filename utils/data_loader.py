@@ -17,7 +17,6 @@ class LoadData:
         self.train_path = join(self.root_path, 'train')
         self.val_path = join(self.root_path, 'val')
         self.test_path = join(self.root_path, 'test')
-        # is_valid_file = lambda x: x.endswith('png')
 
         if mode == 'train':
             self.dataset = glob.glob(self.train_path + '/*.jpg')
@@ -36,8 +35,8 @@ class LoadData:
         return cv2.resize(img, (self.img_height, self.img_width))
 
     def __getitem__(self, item):
-        pil_img = Image.open(self.dataset[item]).convert('RGB')
-        img = np.array(pil_img)
+        img = Image.open(self.dataset[item]).convert('RGB')
+        img = np.array(img)
         img = self._augment(img)
         img = img.astype(np.uint8)
         img = process_image(img, (self.img_height, self.img_width))

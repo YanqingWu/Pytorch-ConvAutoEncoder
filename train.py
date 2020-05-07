@@ -26,7 +26,7 @@ def main(args):
     logger.log.info('success load data from: %s' % args.data)
 
     """ choose model """
-    logger.log.info('using model: %s' % args.arc)
+    # logger.log.info('using model: %s' % args.arc)
     if args.resume:
         logger.log.info('using resume model: %s' % args.resume)
         states = torch.load(args.resume)
