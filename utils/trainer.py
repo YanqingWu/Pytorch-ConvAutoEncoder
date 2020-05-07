@@ -12,7 +12,7 @@ class Trainer:
         self.train_loader = train_loader
         self.val_loader = val_loader
         self.iters = 0
-        self.best_result = 0
+        self.best_result = 100
         self.cuda = cuda
 
     def _train_one_epoch(self, epoch):
@@ -72,7 +72,7 @@ class Trainer:
                 'optimizer': self.optimizer.state_dict()
             }
 
-            if metric > self.best_result:
+            if metric < self.best_result:
                 self.best_result = metric
                 is_best = True
                 self.logger.save_checkpoint(states, is_best, prefix=self.model._get_name() +

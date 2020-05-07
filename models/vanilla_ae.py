@@ -65,8 +65,8 @@ class AutoEncoder(nn.Module):
 
 
 if __name__ == '__main__':
-    """ img size must be 2^N """
-    x = torch.rand(1, 3, 512, 512)
+    """ img size must be 16*N (224, 240, ...) """
+    x = torch.rand(1, 3, 400, 400)
     model = AutoEncoder()
     y = model(x)
     print(x.shape, y.shape)

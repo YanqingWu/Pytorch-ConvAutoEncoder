@@ -5,16 +5,27 @@ import random
 import numpy as np
 import torch.nn as nn
 import torch.optim as optim
-from torchvision import transforms
 from torch.utils.data import DataLoader
 
 
-def process_image(img, img_size):
-    img = cv2.resize(img, img_size)
-    img = transforms.Compose([transforms.ToPILImage(),
-                              transforms.ToTensor(),
-                              transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-                              ])(img)
+def process_image(img, img_size=()):
+    if img_size:
+        img = cv2.resize(img, img_size)
+    img = img / 255
+    img -= np.array([0.485, 0.456, 0.406])
+    img /= np.array([0.229, 0.224, 0.225])
+    img = torch.from_numpy(img)
+    img = img.permute((2, 0, 1)).float()
+    return img
+
+
+def inverse_process(img):
+    img = img.permute(1, 2, 0)
+    img = img.cpu().numpy()
+    img *= np.array([0.229, 0.224, 0.225])
+    img += np.array([0.485, 0.456, 0.406])
+    img *= 255
+    img = np.uint8(img)
     return img
 
 

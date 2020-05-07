@@ -11,10 +11,10 @@ parser.add_argument('-d', '--data', default='data', type=str,
 parser.add_argument('-j', '--workers', default=0, type=int,
                     help='number of data loading workers, windows need to change to 0.')
 
-parser.add_argument('-ih', '--img-height', default=224, type=int,
+parser.add_argument('-ih', '--img-height', default=512, type=int,
                     help='image height')
 
-parser.add_argument('-iw', '--img-width', default=224, type=int,
+parser.add_argument('-iw', '--img-width', default=512, type=int,
                     help='image width')
 
 parser.add_argument('-aug', '--augment', action='store_false',
@@ -26,7 +26,7 @@ parser.add_argument('-lr', '--learning-rate', default=0.001, type=float, dest='l
 parser.add_argument('-wp', '--warmup', action='store_true',
                     help='learning rate warmup')
 
-parser.add_argument('-we', '--warmup-epochs', default=10, type=int,
+parser.add_argument('-we', '--warmup-epochs', default=50, type=int,
                     help='learning rate warmup epochs, only if warmup is true')
 
 parser.add_argument('-ls', '--linear-scaling', action='store_true',
@@ -63,7 +63,7 @@ parser.add_argument('-r', '--resume', type=str,
                     help='resume model')
 
 """ val args """
-parser.add_argument('-vb', '--val-batch', default=8, type=int,
+parser.add_argument('-vb', '--val-batch', default=32, type=int,
                     help='val batch size')
 
 """ seed args """

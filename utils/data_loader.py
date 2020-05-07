@@ -8,7 +8,7 @@ from utils.utils import process_image
 
 
 class LoadData:
-    def __init__(self, root_path='data', img_height=500, img_width=500, mode='train', aug=True):
+    def __init__(self, root_path='data', img_height=512, img_width=512, mode='train', aug=True):
         self.root_path = root_path
         self.img_height = img_height
         self.img_width = img_width
@@ -41,7 +41,6 @@ class LoadData:
         img = self._augment(img)
         img = img.astype(np.uint8)
         img = process_image(img, (self.img_height, self.img_width))
-        img = img.float()
         return img, img
 
     def __len__(self):
