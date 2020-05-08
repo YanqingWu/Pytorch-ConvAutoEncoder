@@ -48,7 +48,7 @@ def main(args):
             model = model.cuda()
 
     """ set criterion """
-    criterion = Loss.build_loss(args.loss)
+    criterion = Loss().build_loss(args.loss)
     if use_cuda:
         criterion = criterion.cuda()
 
