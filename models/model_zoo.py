@@ -13,4 +13,6 @@ def make_model(model_name: str, img_channels=3):
         model = AutoEncoder(img_channels=img_channels)
     else:
         raise NotImplemented('model must in %s' % str(model_zoo))
-    return init_weights(model)
+    init_weights(model)
+    return model
+
