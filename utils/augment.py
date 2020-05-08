@@ -3,8 +3,8 @@ from albumentations import *
 
 def augment(img):
     aug = Compose([
-        OneOf([RandomGamma(gamma_limit=(80, 120), p=0.5),
-               RandomBrightnessContrast(brightness_limit=0.2, contrast_limit=0.2)],
+        OneOf([RandomGamma(gamma_limit=(30, 120), p=0.5),
+               RandomBrightnessContrast(brightness_limit=0.5, contrast_limit=0.5, p=1)],
               p=1),
         OneOf([GaussNoise(var_limit=(10.0, 50.0), mean=0, p=0.5),
                ISONoise(color_shift=(0.01, 0.05), intensity=(0.1, 0.5), p=0.5),
