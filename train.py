@@ -35,8 +35,7 @@ def main(args):
         model.load_state_dict(states['state_dict'])
     else:
         logger.log.info('not using resume model')
-        if args.arc == 'ae':
-            model = make_model(args.arc, img_channels=3)
+        model = make_model(args.arc, img_channels=3)
 
     """ set cuda """
     use_cuda, multi_gpus = use_gpu_or_multi_gpus(args, logger)
