@@ -48,6 +48,7 @@ def main(args):
 
     """ set criterion """
     criterion = Loss().build_loss(args.loss)
+    logger.log.info('use loss function: %s' % args.loss)
     if use_cuda:
         criterion = criterion.cuda()
 
