@@ -43,6 +43,10 @@ parser.add_argument('-lpt', '--low-precision-training', action='store_true',
 parser.add_argument('-a', '--arc', default='unet',
                     help='model architecture')
 
+""" loss function """
+parser.add_argument('--loss', type=str, default='mse',
+                    help='loss function accept [MSE, L1, SmoothL1, LogCosh, XTanh, XSigmoid, Algebraic]')
+
 """ train args """
 parser.add_argument('-ep', '--epochs', default=200, type=int,
                     help='number of total epochs to run')

@@ -1,10 +1,10 @@
 from utils.utils import *
-from models.unet import UNet
+from utils.loss import Loss
 from utils.config import parser
 from utils.logger import Logger
 from utils.trainer import Trainer
 from utils.data_loader import LoadData
-from models.vanilla_ae import AutoEncoder
+from models.model_zoo import make_model
 
 
 def main(args):
@@ -36,9 +36,7 @@ def main(args):
     else:
         logger.log.info('not using resume model')
         if args.arc == 'ae':
-            model = AutoEncoder()
-        elif args.arc == 'unet':
-            model = UNet(num_classes=3)
+            model = make_model(args.arc, img_channels=3)
 
     """ set cuda """
     use_cuda, multi_gpus = use_gpu_or_multi_gpus(args, logger)
@@ -50,7 +48,7 @@ def main(args):
             model = model.cuda()
 
     """ set criterion """
-    criterion = nn.MSELoss()
+    criterion = Loss.build_loss(args.loss)
     if use_cuda:
         criterion = criterion.cuda()
 
