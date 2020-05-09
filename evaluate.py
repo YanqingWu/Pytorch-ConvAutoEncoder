@@ -1,6 +1,7 @@
 import glob
 import torch
 import argparse
+import numpy as np
 import pandas as pd
 from tqdm import tqdm
 import torch.nn as nn
@@ -15,9 +16,17 @@ device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cp
 def evaluate(model, imgs):
     criterion = nn.MSELoss(reduction='none')
     preds, results = predict(model, imgs)
+
     reconstruct_error = criterion(imgs.to(device), results)
-    reconstruct_error = reconstruct_error.mean(dim=(1, 2, 3)).tolist()
-    return reconstruct_error
+    # reconstruct_error = reconstruct_error.mean(dim=(1, 2, 3)).tolist()
+    counts = []
+    for res in reconstruct_error:
+        error = res.cpu().numpy().ravel()
+        error.sort()
+        error = error[-10000:]
+        count, bin = np.histogram(error, bins=1000)
+        counts.append(count)
+    return counts
 
 
 def evaluate_path(path, model, batch_size=16):
@@ -28,7 +37,7 @@ def evaluate_path(path, model, batch_size=16):
     for imgs in tqdm(batch_loader):
         reconstruct_error = evaluate(model, imgs)
         res.extend(reconstruct_error)
-    df = pd.DataFrame(res, index=indexs, columns=['reconstruct error'])
+    df = pd.DataFrame(res, index=indexs, columns=list(map(str, range(1000))))
     df.to_csv(path + '/a0_results.csv')
 
 
@@ -59,4 +68,6 @@ if __name__ == '__main__':
         evaluate_root(args.data_root, model, batch_size=args.batch_size)
     else:
         evaluate_path(args.data_path, model, batch_size=args.batch_size)
+
+
 

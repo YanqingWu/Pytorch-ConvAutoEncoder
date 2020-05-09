@@ -15,4 +15,3 @@ def make_model(model_name: str, img_channels=3):
         raise NotImplemented('model must in %s' % str(model_zoo))
     init_weights(model)
     return model
-
