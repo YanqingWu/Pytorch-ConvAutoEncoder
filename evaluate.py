@@ -68,6 +68,3 @@ if __name__ == '__main__':
         evaluate_root(args.data_root, model, batch_size=args.batch_size)
     else:
         evaluate_path(args.data_path, model, batch_size=args.batch_size)
-
-
-
