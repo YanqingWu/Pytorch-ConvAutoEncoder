@@ -11,8 +11,7 @@ def augment(img):
 
         # """ bright or contrast """
         OneOf([RandomBrightnessContrast(brightness_limit=0.3, contrast_limit=0., p=1),
-               RandomBrightnessContrast(brightness_limit=0., contrast_limit=0.3, p=1)
-               ],
+               RandomBrightnessContrast(brightness_limit=0., contrast_limit=0.3, p=1)],
               p=1),
 
         # """ noise """
