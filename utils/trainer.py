@@ -59,6 +59,7 @@ class Trainer:
             total_loss /= (i + 1)
 
             self.logger.log.info("Epoch:{}, Validation Loss: {}, ".format(epoch, total_loss))
+            self.logger.writter.add_scalar('Val/Loss', total_loss, epoch)
         return total_loss
 
     def train(self, epochs):

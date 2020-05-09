@@ -33,11 +33,12 @@ def train_classifier(train_X, val_X, train_y, val_y):
 def plot_tsne(X, y):
     tsne = TSNE(n_components=2, init='pca', random_state=0)
     X_tsne = tsne.fit_transform(X)
-    plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y, label="t-SNE")
+    plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y, label="t-SNE", alpha=0.3)
     plt.show()
 
 
 if __name__ == '__main__':
     train_X, val_X, train_y, val_y = get_datasets()
     plot_tsne(train_X, train_y)
-
+    acc = train_classifier(train_X, val_X, train_y, val_y)
+    print('accuracy: %s' % acc)

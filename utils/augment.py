@@ -21,7 +21,6 @@ def augment(img):
                MultiplicativeNoise(multiplier=(0.9, 1.1), per_channel=False, elementwise=False, p=1)],
               p=1),
 
-
         # """ scale """
         ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.5, rotate_limit=1, p=0.5),
 
@@ -56,4 +55,3 @@ if __name__ == '__main__':
     img = augment(img)
     plt.imshow(img)
     plt.show()
-
