@@ -111,7 +111,7 @@ class VanillaVAE(nn.Module):
         x = self.encode(x)
         z = self.reparameterize(x[0], x[1])
         x = self.decode(z)
-        return x
+        return z, x
 
 
 if __name__ == '__main__':
